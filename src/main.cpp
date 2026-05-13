@@ -64,45 +64,6 @@ int main() {
             std::cout << "Tie\n";
         }
     };
-    
-    /*while (true) {
-        std::cout << "\n\n" << ((color == RED) ? "red" : "yellow") << "\n";
-        game.output(std::cout);
-
-        if (color == YELLOW) {
-            std::string input;
-            std::cin >> input;
-
-            if (input == "quit") {
-                break;
-            }
-
-            int column = std::stoi(input);
-            if (game.play(column, color) == -1) {
-                std::cout << "fail\n";
-                continue;
-            }
-            color = RED;
-        }
-        else if (color == RED) {
-            int move = bot.get_best_move(game, true, std::chrono::seconds(10));
-            if (game.play(move, color) == -1) {
-                std::cout << "WHAT\n";
-                std::cout << move << "\n";
-                return -1;
-            }
-            color = YELLOW;
-        }
-
-        if (game.red_win) {
-            std::cout << "Red wins!\n";
-            return 0;
-        }
-        if (game.yellow_win) {
-            std::cout << "Yellow wins!\n";
-            return 0;
-        }
-    }*/
 
     return 0;
 }

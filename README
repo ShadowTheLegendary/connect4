@@ -1,0 +1,2 @@
+Simple connect4 implementation with a bot.
+To figure out the communication protocol I would just read main.cpp - it's rather simple.
