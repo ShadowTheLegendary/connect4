@@ -31,11 +31,9 @@
 #define COLUMNS 7
 #define ROWS 6
 
-#include <iostream>
-#include <limits>
 #include <vector>
 #include <array>
-#include <chrono>
+#include <stack>
 
 #include "src/transposition_table/transposition_table.hpp"
 
@@ -43,35 +41,15 @@ class Connect4 {
 public:
     Connect4();
 
-    Connect4(const Connect4& other) {
-        for (int i = 0; i < 11; ++i) {
-            grid[i] = other.grid[i];
-        }
-        red_win = other.red_win;
-        yellow_win = other.yellow_win;
-    }   
+    Connect4(const Connect4& other);
 
     int play(int column, int color);
 
+    int undo(int column);
+
     void output(std::ostream& output);
 
-    std::vector<int> get_valid_moves() const {
-        std::vector<int> moves;
-
-        for (int c = 0; c < COLUMNS; c++) {
-            // Check if there's an empty spot in this column by starting from the bottom
-            int row = ROWS - 1;
-            while (row >= 0 && get_token_occupancy(c, row)) {
-                row--;
-            }
-            // If we found an empty spot, column is valid
-            if (row >= 0) {
-                moves.push_back(c+1);
-            }
-        }
-
-        return moves;
-    }
+    std::vector<int> get_valid_moves() const;
 
     int get_number_of_n_in_a_rows(int n, int color) const;
 
@@ -87,6 +65,7 @@ public:
 private:
 
     std::array<unsigned char, 11> grid;
+    std::stack<std::pair<bool, bool>> win_state_stack;
 
     unsigned char get_token(int column, int row) const;
 
@@ -95,19 +74,6 @@ private:
     unsigned char make_token(int color) const;
 
     void update_win(int last_col, int last_row);
-
-};
-
-class Connect4Bot {
-public:
-    int evaluate(const Connect4& position) const;
-
-    int minimax(const Connect4& position, unsigned int depth, int alpha, int beta, bool maximizing_player, std::chrono::steady_clock::time_point deadline) const;
-
-    int get_best_move(const Connect4& position, bool maximizing_player, std::chrono::milliseconds time_limit);
-
-private:
-    mutable TranspositionTable tt;
 
 };
 

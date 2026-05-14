@@ -1,2 +1,7 @@
-Simple connect4 implementation with a bot.
+Simple connect4 implementation with a bot. A
 To figure out the communication protocol I would just read main.cpp - it's rather simple.
+
+Yes I know I used redundant header guards, deal with it. 
+I also probably could have used constexpr constants instead of macros.
+
+The bot is somewhat decent, it can reliably beat 8th graders.
